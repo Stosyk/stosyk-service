@@ -20,10 +20,6 @@ private func setupModels(_ drop: Droplet) throws {
 }
 
 private func setupRoutes(_ drop: Droplet) throws {
-    drop.get("/") { request in
-        return "Hello Stosyk!"
-    }
-    
     drop.collection(V1PublicCollection())
     drop.collection(V1AdminCollection())
     drop.collection(V1ManageCollection())
