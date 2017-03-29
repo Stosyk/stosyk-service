@@ -1,6 +1,6 @@
 # Stosyk Web Service
 
-[![Build Status](https://travis-ci.org/Stosyk/stosyk-service.svg?branch=master)](https://travis-ci.org/Stosyk/stosyk-service)
+[![Build Status](https://travis-ci.org/Stosyk/stosyk-service.svg?branch=develop)](https://travis-ci.org/Stosyk/stosyk-service) [![codecov](https://codecov.io/gh/Stosyk/stosyk-service/branch/develop/graph/badge.svg)](https://codecov.io/gh/Stosyk/stosyk-service)
 
 Stosyk is a translation management platform for software projects. The API allows you to work with localization data stored in Stosyk for your account.
 

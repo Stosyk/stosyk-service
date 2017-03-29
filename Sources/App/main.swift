@@ -1,4 +1,4 @@
-import App
+import AppLogic
 
 /// We have isolated all of our App's logic into
 /// the App module because it makes our app
@@ -17,5 +17,5 @@ import App
 /// .run() runs the Droplet's commands, 
 /// if no command is given, it will default to "serve"
 let drop = Droplet()
-try App.setup(drop)
+try AppLogic.setup(drop)
 drop.run()

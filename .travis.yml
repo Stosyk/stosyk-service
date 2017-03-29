@@ -1,10 +1,18 @@
 os:
-  - linux
-  - osx
+- linux
+- osx
 language: generic
 sudo: required
 dist: trusty
-osx_image: xcode8
+osx_image: xcode8.2
 script:
-  - eval "$(curl -sL https://swift.vapor.sh/ci-3.1)"
-  - eval "$(curl -sL https://swift.vapor.sh/codecov)"
+- eval "$(curl -sL https://swift.vapor.sh/ci-3.1)"
+- eval "$(curl -sL https://swift.vapor.sh/codecov)"
+# deploy:
+  # provider: heroku
+  # api_key:
+  #   secure: dPo+wOSfelmQ7pfXSt4hSNx+tpmfvuCCfFgt3C98oJPk7IycQlyrs9dHjYmuX07Aluwq55gw9ir4twY+fZbGe2BT1Neo/6PkZ2l16yiC2UMsS03aUiXX9+ISurU5HJJ8+rzCIS9pcxz0ozv2Kpp13a+2If6d4mg9XRM5ZKsrSx3f307E+jdu2DInq2YuTo6ecflGvHfvPgfin1jfgoMKKmp/NFJTFi1mM+v+x1AXgT0ZKjzcEk4sjoukQRJsEEeFzcHs03BtU3tBWVsKesmq6wgSh8ONI6G6QFDZBD1XltvLuw+yoOtDJIEmCZDk8z1b/Pox4Lq2F+euXvEgsDd4emPTY7L/Qev4xYaliS+J3vINbrPSq6DyzY2g8srkXCAeTRRbNy3iKQTOjFgxiOOrsfdyrbiVM9agIXJL8beE/Agse4bqk/TIW3F/UCdYEk2wn5sBBccqLCndUWTm7qpPazeaOtGpOGihpcgyAAgNnd6BO6F1Nw6WyvxMJ353+fQQN8oDSXCLkqyhKlJ+M3N/zThrDgxKhnfTOCZ/reCbaLDSyCjPixUEMyo/BIJYWoB5CJ16nvwdfqs5LycG7GUvfvbx09r0dTzphbDCNRbjB+rrke2xhN2k040WFIt6V6aO6P4DNQEk6Nq6+LAcibU1zr4N5ftnXRdbRprS7RmIy0U=
+  # app: stosyk-sandbox
+  # on:
+  #   repo: Stosyk/stosyk-service
+  #   branch: develop
