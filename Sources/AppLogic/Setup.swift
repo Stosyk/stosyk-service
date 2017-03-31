@@ -1,10 +1,15 @@
 @_exported import Vapor
 
 public func setup(_ drop: Droplet) throws {
+    try setupMiddleware(drop)
     try setupProviders(drop)
     try setupModels(drop)
     try setupRoutes(drop)
     try setupResources(drop)
+}
+
+private func setupMiddleware(_ drop: Droplet) throws {
+    drop.middleware.insert(CORSMiddleware(), at: 0)
 }
 
 private func setupProviders(_ drop: Droplet) throws {
