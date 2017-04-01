@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import App
+@testable import AppLogic
 
 class RouteTests: XCTestCase {
     /// This is a requirement for XCTest on Linux

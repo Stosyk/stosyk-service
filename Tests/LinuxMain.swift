@@ -1,10 +1,10 @@
 #if os(Linux)
 
 import XCTest
-@testable import AppTests
+@testable import AppLogicTests
 
 XCTMain([
-    // AppTests
+    // AppLogicTests
     testCase(RouteTests.allTests),
 ])
 
