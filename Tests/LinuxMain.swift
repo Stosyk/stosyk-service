@@ -6,7 +6,8 @@ import XCTest
 XCTMain([
     // AppLogicTests
     testCase(RouteTests.allTests),
-    testCase(V1PublicCollectionTests.allTests)
+    testCase(V1PublicCollectionTests.allTests),
+    testCase(V1AdminCollectionTests.allTests)
 ])
 
 #endif
