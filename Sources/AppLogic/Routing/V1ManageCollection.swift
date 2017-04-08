@@ -32,31 +32,26 @@ class V1ManageCollection: RouteCollection {
              - Returns 201: Created project
              */
             projects.post { request in
-                return try Response(status: .created, json: JSON(node: projectStub(id: 2)))
+                return try Response(status: .created, json: JSON(node: [
+                    "projects": [
+                        projectStub(id: 2)
+                    ]]))
             }
             
             /**
-             Get all projects.
+             Get all projects
              
-             `GET: /projects?since=timestamp`
-             
-             - Parameter since: Unix timestamp, allows filtering by update time. (Optional)
+             `GET: /projects`
              
              - Returns 200: List of projects
              */
             projects.get { request in
-                var meta: Node = ["total": 2, "limit": 10, "offset": 0]
-                
-                if let since = request.query?["since"] {
-                    meta["since"] = since
-                }
-                
                 return try JSON(node: [
                     "projects": [
                         projectStub(id: 1),
                         projectStub(id: 2)
                     ],
-                    "_meta": meta
+                    "_meta": ["total": 2, "limit": 10, "offset": 0]
                     ])
             }
             
@@ -67,10 +62,13 @@ class V1ManageCollection: RouteCollection {
              
              - Parameter id:    Int identifier of a project.
              
-             - Returns 200: Project
+             - Returns 200: List with single project
              */
             projects.get(Int.self) { request, projectId in
-                return try JSON(node: projectStub(id: 2))
+                return try JSON(node: [
+                    "projects": [
+                        projectStub(id: Node(projectId))
+                    ]])
             }
             
             /**
@@ -81,10 +79,13 @@ class V1ManageCollection: RouteCollection {
              - Parameter id:        Int identifier of a project.
              - Parameter <body>:    JSON with changed values.
              
-             - Returns 200: Updated project
+             - Returns 200: List with updated project
              */
             projects.put(Int.self) { request, projectId in
-                return try JSON(node: projectStub(id: 2))
+                return try JSON(node: [
+                    "projects": [
+                        projectStub(id: Node(projectId))
+                    ]])
             }
             
             /**
@@ -99,85 +100,97 @@ class V1ManageCollection: RouteCollection {
             projects.delete(Int.self) { request, projectId in
                 return Response(status: .noContent)
             }
-            
-            /**
-             Create translations for project with `id`
-             
-             `POST: /projects/<id>/translations`
-             
-             - Parameter id:        Int identifier of a project.
-             - Parameter <body>:    JSON dictionary with new translations.
-             
-             - Returns 201: List of new translations as a key-value structure
-             */
-            projects.post(Int.self, "translations") { request, projectId in
-                let json = try JSON(node: [
-                    "translations": [
-                        "main.title": "Main",
-                    ],
-                    "_meta": ["total": 1]
+        }
+        
+        /**
+         Routes group for `/manage/v1/tags`
+         */
+        v1.group("tags") { tags in
+            func tagStub(id: Node) -> Node {
+                // TODO: Remove after implementation
+                return .object([
+                    "id": id,
+                    "name": "StubTag",
+                    "level": 0
                     ])
-                return try Response(status: .created, json: json)
             }
             
             /**
-             Get translations in `locale` for project with `id`
+             Create new tag
              
-             `GET: /projects/<id>/translations/<locale>?since=timestamp`
+             `POST: /tags`
              
-             - Parameter id:        Int identifier of a project.
-             - Parameter locale:    Locale identifier (e.g. 'en', 'de', etc.) for translations.
-             - Parameter since:     Unix timestamp, allows filtering by update time. (Optional)
+             - Parameter <body>:    JSON with values.
              
-             - Returns 200: List of translations as a key-value structure
+             - Returns 201: Created tag
              */
-            projects.get(Int.self, "translations", String.self) { request, projectId, locale in
-                var meta: Node = ["total": 2]
-                
-                if let since = request.query?["since"] {
-                    meta["since"] = since
-                }
-                
+            tags.post { request in
+                return try Response(status: .created, json: JSON(node: [
+                    "tags": [
+                        tagStub(id: 2)
+                    ]]))
+            }
+            
+            /**
+             Get all tags
+             
+             `GET: /tags`
+             
+             - Returns 200: List of tags
+             */
+            tags.get { request in
                 return try JSON(node: [
-                    "translations": [
-                        "main.title": "Main",
-                        "main.sub": ""
+                    "tags": [
+                        tagStub(id: 1),
+                        tagStub(id: 2)
                     ],
-                    "_meta": meta
+                    "_meta": ["total": 2, "limit": 10, "offset": 0]
                     ])
             }
             
             /**
-             Update translations in `locale` for project with `id`
+             Get tag with `id`
              
-             `PUT: /projects/<id>/translations/<locale>`
+             `GET: /tags/<id>`
              
-             - Parameter id:        Int identifier of a project.
-             - Parameter locale:    Locale identifier (e.g. 'en', 'de', etc.) for translations.
-             - Parameter <body>:    JSON dictionary with new translations.
+             - Parameter id:    Int identifier of a tag.
              
-             - Returns 200: List of new translations as a key-value structure
+             - Returns 200: List with single tag
              */
-            projects.put(Int.self, "translations", String.self) { request, projectId, locale in
+            tags.get(Int.self) { request, tagId in
                 return try JSON(node: [
-                    "translations": [
-                        "main.title": "Main",
-                    ],
-                    "_meta": ["total": 1]
-                    ])
+                    "tags": [
+                        tagStub(id: Node(tagId))
+                    ]])
             }
             
             /**
-             Delete translations from project with `id`
+             Update tag with `id`
              
-             `DELETE: /projects/<id>/translations`
+             `PUT: /tags/<id>`
              
-             - Parameter id:        Int identifier of a project.
-             - Parameter <body>:    JSON array with keys which has to be removed.
+             - Parameter id:        Int identifier of a tag.
+             - Parameter <body>:    JSON with changed values.
+             
+             - Returns 200: List with updated tag
+             */
+            tags.put(Int.self) { request, tagId in
+                return try JSON(node: [
+                    "tags": [
+                        tagStub(id: Node(tagId))
+                    ]])
+            }
+            
+            /**
+             Delete tag with `id`
+             
+             `DELETE: /tags/<id>`
+             
+             - Parameter id:    Int identifier of a tag.
              
              - Returns 204: Empty response
              */
-            projects.delete(Int.self, "translations") { request, projectId in
+            tags.delete(Int.self) { request, tagId in
                 return Response(status: .noContent)
             }
         }

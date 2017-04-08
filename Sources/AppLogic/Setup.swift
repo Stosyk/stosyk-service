@@ -26,8 +26,8 @@ private func setupModels(_ drop: Droplet) throws {
 
 private func setupRoutes(_ drop: Droplet) throws {
     drop.collection(V1PublicCollection())
-    drop.collection(V1AdminCollection())
     drop.collection(V1ManageCollection())
+    drop.collection(V1AdminCollection())
 }
 
 private func setupResources(_ drop: Droplet) throws {

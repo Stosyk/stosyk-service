@@ -14,13 +14,6 @@ extension Droplet {
         try drop.runCommands()
         return drop
     }
-    
-    // Must be served to activate
-    static func live() throws -> Droplet {
-        let drop = Droplet(arguments: ["vapor", "serve"])
-        try AppLogic.setup(drop)
-        return drop
-    }
 }
 
 extension XCTestCase {
