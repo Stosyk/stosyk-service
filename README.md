@@ -5,10 +5,9 @@
 
 Stosyk is a translation management platform for software projects. The API allows you to work with localization data stored in Stosyk for your account.
 
-### Supported environments
-[![https://stosyk-sandbox.herokuapp.com](https://img.shields.io/badge/https%3A%2F%2Fstosyk--sandbox.herokuapp.com-up-brightgreen.svg)](https://stosyk-sandbox.herokuapp.com)
-
-[![https://stosyk.io](https://img.shields.io/badge/https%3A%2F%2Fstosyk.io-down-red.svg)](https://stosyk.io)
+### Supported environments:
+- [![sandbox](https://img.shields.io/badge/sandbox%20%20%20-https%3A%2F%2Fstosyk--sandbox.herokuapp.com-brightgreen.svg)](https://stosyk-sandbox.herokuapp.com)
+- [![production](https://img.shields.io/badge/production-https%3A%2F%2Fstosyk.io-red.svg)](https://stosyk.io)
 
 ## Links
 - Vapor web framework: http://docs.vapor.codes
