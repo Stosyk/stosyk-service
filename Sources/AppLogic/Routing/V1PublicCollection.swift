@@ -34,8 +34,8 @@ final class V1PublicCollection: RouteCollection {
             projects.get { request in
                 var meta: Node = ["total": 2, "limit": 10, "offset": 0]
                 
-                if let since = request.query?["since"] {
-                    meta["since"] = since
+                if let since = request.query?["since"]?.int {
+                    meta["since"] = Node(since)
                 }
                 
                 return try JSON(node: [
@@ -57,7 +57,10 @@ final class V1PublicCollection: RouteCollection {
              - Returns 200: Project
              */
             projects.get(Int.self) { request, projectId in
-                return try JSON(node: projectStub(id: 2))
+                return try JSON(node: [
+                    "projects": [
+                        projectStub(id: Node(projectId))
+                    ]])
             }
             
             /**
@@ -74,8 +77,8 @@ final class V1PublicCollection: RouteCollection {
             projects.get(Int.self, "translations", String.self) { request, projectId, locale in
                 var meta: Node = ["total": 2]
                 
-                if let since = request.query?["since"] {
-                    meta["since"] = since
+                if let since = request.query?["since"]?.int {
+                    meta["since"] = Node(since)
                 }
                 
                 return try JSON(node: [
