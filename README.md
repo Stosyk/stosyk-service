@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="285" height="300" src="https://cloud.githubusercontent.com/assets/625463/25070678/c4a7df5a-22ad-11e7-88e3-6644fc811942.png">
+</p>
+
 # Stosyk Web Service
 
 [![language Swift 3.1](https://img.shields.io/badge/language-Swift%203.1-blue.svg)](https://swift.org)
