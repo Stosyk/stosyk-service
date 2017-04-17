@@ -73,16 +73,16 @@ class V1ManageCollectionTests: XCTestCase {
     }
     
     func testPostTagResponseStructure() throws {
-        let response = try dropResponse(method: .post, uri: "/manage/v1/tags")
+        let response = try dropResponse(method: .post, uri: "/manage/v1/projects/100/tags")
         let node = try Node(response: response)
         
         XCTAssertEqual(response.status, .created)
         let items = node?["tags"]?.nodeArray
         XCTAssertTrue(items?.count == 1)
     }
-    
+
     func testGetTagsResponseStructure() throws {
-        let response = try dropResponse(method: .get, uri: "/manage/v1/tags")
+        let response = try dropResponse(method: .get, uri: "/manage/v1/projects/100/tags")
         let node = try Node(response: response)
         
         XCTAssertEqual(response.status, .ok)
@@ -93,7 +93,7 @@ class V1ManageCollectionTests: XCTestCase {
     }
     
     func testGetTagIdResponseStructure() throws {
-        let response = try dropResponse(method: .get, uri: "/manage/v1/tags/100")
+        let response = try dropResponse(method: .get, uri: "/manage/v1/projects/100/tags/100")
         let node = try Node(response: response)
         
         XCTAssertEqual(response.status, .ok)
@@ -103,7 +103,7 @@ class V1ManageCollectionTests: XCTestCase {
     }
     
     func testPutTagIdResponseStructure() throws {
-        let response = try dropResponse(method: .put, uri: "/manage/v1/tags/100")
+        let response = try dropResponse(method: .put, uri: "/manage/v1/projects/100/tags/100")
         let node = try Node(response: response)
         
         XCTAssertEqual(response.status, .ok)
@@ -113,7 +113,7 @@ class V1ManageCollectionTests: XCTestCase {
     }
     
     func testDeleteTagIdResponseStructure() throws {
-        let response = try dropResponse(method: .delete, uri: "/manage/v1/tags/100")
+        let response = try dropResponse(method: .delete, uri: "/manage/v1/projects/100/tags/100")
         
         XCTAssertEqual(response.status, .noContent)
         if let bytes = response.body.bytes {

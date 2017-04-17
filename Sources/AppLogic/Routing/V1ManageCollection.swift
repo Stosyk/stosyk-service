@@ -21,6 +21,15 @@ class V1ManageCollection: RouteCollection {
                     "name": "StubProject"
                     ])
             }
+            
+            func tagStub(id: Node) -> Node {
+                // TODO: Remove after implementation
+                return .object([
+                    "id": id,
+                    "name": "StubTag",
+                    "level": 0
+                    ])
+            }
 
             /**
              Create new project
@@ -100,31 +109,18 @@ class V1ManageCollection: RouteCollection {
             projects.delete(Int.self) { request, projectId in
                 return Response(status: .noContent)
             }
-        }
-        
-        /**
-         Routes group for `/manage/v1/tags`
-         */
-        v1.group("tags") { tags in
-            func tagStub(id: Node) -> Node {
-                // TODO: Remove after implementation
-                return .object([
-                    "id": id,
-                    "name": "StubTag",
-                    "level": 0
-                    ])
-            }
             
             /**
-             Create new tag
+             Create new tag inside the project
              
-             `POST: /tags`
+             `POST: /projects/<projectId>/tags`
              
+             - Parameter projectId: Int identifier of a project.
              - Parameter <body>:    JSON with values.
              
              - Returns 201: Created tag
              */
-            tags.post { request in
+            projects.post(Int.self, "tags") { request, projectId in
                 return try Response(status: .created, json: JSON(node: [
                     "tags": [
                         tagStub(id: 2)
@@ -132,13 +128,15 @@ class V1ManageCollection: RouteCollection {
             }
             
             /**
-             Get all tags
+             Get all tags for the project
              
-             `GET: /tags`
+             `GET: /projects/<projectId>/tags`
+             
+             - Parameter projectId: Int identifier of a project.
              
              - Returns 200: List of tags
              */
-            tags.get { request in
+            projects.get(Int.self, "tags") { request, projectId in
                 return try JSON(node: [
                     "tags": [
                         tagStub(id: 1),
@@ -149,15 +147,16 @@ class V1ManageCollection: RouteCollection {
             }
             
             /**
-             Get tag with `id`
+             Get tag with `id` inside the project
              
-             `GET: /tags/<id>`
+             `GET: /projects/<projectId>/tags/<tagId>`
              
-             - Parameter id:    Int identifier of a tag.
+             - Parameter projectId: Int identifier of a project.
+             - Parameter tagId:     Int identifier of a tag.
              
              - Returns 200: List with single tag
              */
-            tags.get(Int.self) { request, tagId in
+            projects.get(Int.self, "tags", Int.self) { request, projectId, tagId in
                 return try JSON(node: [
                     "tags": [
                         tagStub(id: Node(tagId))
@@ -165,16 +164,17 @@ class V1ManageCollection: RouteCollection {
             }
             
             /**
-             Update tag with `id`
+             Update tag with `id` inside the project
              
-             `PUT: /tags/<id>`
+             `PUT: /projects/<projectId>/tags/<tagId>`
              
-             - Parameter id:        Int identifier of a tag.
+             - Parameter projectId: Int identifier of a project.
+             - Parameter tagId:     Int identifier of a tag.
              - Parameter <body>:    JSON with changed values.
              
              - Returns 200: List with updated tag
              */
-            tags.put(Int.self) { request, tagId in
+            projects.put(Int.self, "tags", Int.self) { request, projectId, tagId in
                 return try JSON(node: [
                     "tags": [
                         tagStub(id: Node(tagId))
@@ -182,15 +182,16 @@ class V1ManageCollection: RouteCollection {
             }
             
             /**
-             Delete tag with `id`
+             Delete tag with `id` inside the project
              
-             `DELETE: /tags/<id>`
+             `DELETE: /projects/<projectId>/tags/<tagId>`
              
-             - Parameter id:    Int identifier of a tag.
+             - Parameter projectId: Int identifier of a project.
+             - Parameter tagId:     Int identifier of a tag.
              
              - Returns 204: Empty response
              */
-            tags.delete(Int.self) { request, tagId in
+            projects.delete(Int.self, "tags", Int.self) { request, projectId, tagId in
                 return Response(status: .noContent)
             }
         }
