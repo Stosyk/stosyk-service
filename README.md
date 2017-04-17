@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="498" height="452" src="https://cloud.githubusercontent.com/assets/625463/25073793/b6cc61d2-22f6-11e7-8718-33b2582b80a4.png">
+  <img width="249" height="226" src="https://cloud.githubusercontent.com/assets/625463/25073793/b6cc61d2-22f6-11e7-8718-33b2582b80a4.png">
 </p>
 
 # Stosyk Web Service
