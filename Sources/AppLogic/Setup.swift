@@ -1,4 +1,5 @@
 @_exported import Vapor
+import VaporPostgreSQL
 
 public func setup(_ drop: Droplet) throws {
     try setupMiddleware(drop)
@@ -13,7 +14,7 @@ private func setupMiddleware(_ drop: Droplet) throws {
 }
 
 private func setupProviders(_ drop: Droplet) throws {
-
+    try drop.addProvider(VaporPostgreSQL.Provider.self)
 }
 
 private func setupModels(_ drop: Droplet) throws {

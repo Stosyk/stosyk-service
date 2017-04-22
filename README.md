@@ -37,6 +37,7 @@ brew install vapor/tap/vapor
 ```
 
 ### Linux
+
 ```sh
 # install Vapor Toolbox
 # Ubuntu 16.04 / Ubuntu 16.10
@@ -71,6 +72,36 @@ Install Swift and Vapor
 ```
 sudo apt-get install swift vapor
 ```
+
+### PostgreSQL
+
+We use Postgres as database. The easiest way to install Postgres is through Homebrew. 
+Type in your terminal to download Postgres
+
+```sh
+brew install postgres
+```
+
+Type `psql --version` in the terminal to ensure that you have downloaded Postgres correctly, and you should see something like `psql (PostgreSQL) 9.5.4`.
+
+Type `postgres -D /usr/local/var/postgres/` to start the Postgres server running locally
+
+Once the server has started up, create the database `createdb stosyk`.
+`\l` to list all available databases, `\c stosyk` to connect to stosyk db.
+
+Create a configuration file for Postgres at `Config/secrets/postgresql.json` with following content:
+```sh
+{
+    "host": "127.0.0.1",
+    "user": "username",
+    "password": "",
+    "database": "stosyk",
+    "port": 5432
+}
+```
+Replace username with the name of your user.
+
+Note that git ignores this file, check `.gitignore` for details.
 
 ## Launch
 
