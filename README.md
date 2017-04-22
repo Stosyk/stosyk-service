@@ -14,9 +14,16 @@ Stosyk is a translation management platform for software projects. The API allow
 - [![production](https://img.shields.io/badge/production-https%3A%2F%2Fstosyk.io-red.svg)](https://stosyk.io)
 
 ## Links
-- Vapor web framework: http://docs.vapor.codes
-- Documentation(ReDoc): https://stosyk.github.io/openapi-spec/
-- SwaggerUI: https://stosyk.github.io/openapi-spec/swagger-ui/
+
+- Documentation(ReDoc):
+    + https://stosyk.github.io/apidoc/public/
+    + https://stosyk.github.io/apidoc/manage/
+    + https://stosyk.github.io/apidoc/admin/
+- SwaggerUI:
+    + https://stosyk.github.io/apidoc/public/swagger-ui/
+    + https://stosyk.github.io/apidoc/manage/swagger-ui/
+    + https://stosyk.github.io/apidoc/admin/swagger-ui/
+- Download full specs: https://stosyk.github.io/openapi-spec/
 
 ## Install
 
