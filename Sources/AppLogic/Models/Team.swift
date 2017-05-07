@@ -3,7 +3,7 @@ import Fluent
 import Foundation
 
 final class Team: Model {
-    enum Key {
+    enum Keys {
         static let table = "teams"
         static let id = "id"
         static let name = "name"
@@ -17,8 +17,8 @@ final class Team: Model {
     var description: String?
     
     init(node: Node, in context: Context) throws {
-        name = try node.extract(Key.name)
-        description = try node.extract(Key.description)
+        name = try node.extract(Keys.name)
+        description = try node.extract(Keys.description)
     }
 }
 
@@ -26,23 +26,23 @@ final class Team: Model {
 
 extension Team: NodeRepresentable {
     func makeNode(context: Context) throws -> Node {
-        var node: [String: NodeConvertible] = [Key.name: name]
-        node[Key.id] = id?.int
-        node[Key.description] = description
+        var node: [String: NodeConvertible] = [Keys.name: name]
+        node[Keys.id] = id?.int
+        node[Keys.description] = description
         return try Node(node: node)
     }
 }
 
 extension Team: Preparation {
     static func prepare(_ database: Database) throws {
-        try database.create(Key.table) { teams in
+        try database.create(Keys.table) { teams in
             teams.id()
-            teams.string(Key.name)
-            teams.string(Key.description, optional: true)
+            teams.string(Keys.name)
+            teams.string(Keys.description, optional: true)
         }
     }
     
     static func revert(_ database: Database) throws {
-        try database.delete(Key.table)
+        try database.delete(Keys.table)
     }
 }

@@ -19,7 +19,8 @@ private func setupProviders(_ drop: Droplet) throws {
 
 private func setupModels(_ drop: Droplet) throws {
     let preparations: [Preparation.Type] = [Team.self,
-                                            User.self]
+                                            User.self,
+                                            Admin.self]
     drop.preparations += preparations
 }
 

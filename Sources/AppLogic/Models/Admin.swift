@@ -1,9 +1,9 @@
 import Vapor
 import Fluent
 
-final class User: Model {
+final class Admin: Model {
     enum Keys {
-        static let table = "users"
+        static let table = "admins"
         static let id = "id"
         static let name = "name"
         static let email = "email"
@@ -23,7 +23,7 @@ final class User: Model {
 
 // MARK: -
 
-extension User: NodeRepresentable {
+extension Admin: NodeRepresentable {
     func makeNode(context: Context) throws -> Node {
         var node: [String: NodeConvertible] = [Keys.name: name, Keys.email: email]
         node[Keys.id] = id?.int
@@ -31,7 +31,7 @@ extension User: NodeRepresentable {
     }
 }
 
-extension User: Preparation {
+extension Admin: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(Keys.table) { users in
             users.id()

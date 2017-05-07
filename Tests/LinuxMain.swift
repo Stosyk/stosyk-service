@@ -10,7 +10,8 @@ XCTMain([
     testCase(V1ManageCollectionTests.allTests),
     // Admin
     testCase(TeamControllerTests.allTests),
-    testCase(UserControllerTests.allTests)
+    testCase(UserControllerTests.allTests),
+    testCase(AdminControllerTests.allTests)
 ])
 
 #endif

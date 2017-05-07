@@ -86,7 +86,8 @@ extension DropletDatabaseTests {
             drop.addProvider(provider)
             
             let preparations: [Preparation.Type] = [Team.self,
-                                                    User.self]
+                                                    User.self,
+                                                    Admin.self]
             drop.preparations += preparations
             
             try drop.runCommands()

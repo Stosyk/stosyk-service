@@ -27,10 +27,10 @@ final class TeamController: ResourceRepresentable {
     func update(request: Request, team: Team) throws -> ResponseRepresentable {
         guard let data = request.json?.node else { throw Abort.badRequest }
         var team = team
-        if let name = data[Team.Key.name]?.string, !name.isEmpty {
+        if let name = data[Team.Keys.name]?.string, !name.isEmpty {
             team.name = name
         }
-        if let description = data[Team.Key.description]?.string, !description.isEmpty {
+        if let description = data[Team.Keys.description]?.string, !description.isEmpty {
             team.description = description
         }
 
@@ -40,7 +40,7 @@ final class TeamController: ResourceRepresentable {
     }
     
     private func containerFor(items: [Team], meta: [String: Int]? = nil) throws -> Node {
-        var result = [Team.Key.table: try items.makeNode()]
+        var result = [Team.Keys.table: try items.makeNode()]
         if meta != nil {
             result["_meta"] = try meta?.makeNode()
         }

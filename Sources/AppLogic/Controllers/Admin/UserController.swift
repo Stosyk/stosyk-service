@@ -28,10 +28,10 @@ final class UserController: ResourceRepresentable {
     func update(request: Request, user: User) throws -> ResponseRepresentable {
         guard let data = request.json?.node else { throw Abort.badRequest }
         var user = user
-        if let name = data[User.Key.name]?.string, !name.isEmpty {
+        if let name = data[User.Keys.name]?.string, !name.isEmpty {
             user.name = name
         }
-        if let email = data[User.Key.email]?.string, !email.isEmpty {
+        if let email = data[User.Keys.email]?.string, !email.isEmpty {
             user.email = email
         }
 
@@ -41,7 +41,7 @@ final class UserController: ResourceRepresentable {
     }
     
     private func containerFor(items: [User], meta: [String: Int]? = nil) throws -> Node {
-        var result = [User.Key.table: try items.makeNode()]
+        var result = [User.Keys.table: try items.makeNode()]
         if meta != nil {
             result["_meta"] = try meta?.makeNode()
         }
