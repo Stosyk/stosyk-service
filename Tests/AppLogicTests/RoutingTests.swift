@@ -5,17 +5,36 @@ import HTTP
 @testable import Vapor
 
 
-class RouteTests: XCTestCase {
+class RouteTests: XCTestCase, DropletTests {
     /// This is a requirement for XCTest on Linux
     /// to function properly.
     /// See ./Tests/LinuxMain.swift for examples
     static let allTests = [
-        ("testExample", testExample),
+        ("testV1Collections", testV1Collections),
+        ("testCORSMiddlewareConnection", testCORSMiddlewareConnection)
     ]
-
-    func testExample() throws {
+    
+    var drop: Droplet!
+    
+    override func setUp() {
+         super.setUp()
+        
+        drop = type(of: self).createDroplet()
+    }
+    
+    func testV1Collections() {
         XCTAssertNotNil(V1AdminCollection())
         XCTAssertNotNil(V1ManageCollection())
         XCTAssertNotNil(V1PublicCollection())
+    }
+    
+    func testCORSMiddlewareConnection() throws {
+        try AppLogic.setup(drop)
+        try drop.runCommands()
+        
+        var found = false
+        for item in drop.middleware where item is CORSMiddleware { found = true }
+        
+        XCTAssertTrue(found)
     }
 }
