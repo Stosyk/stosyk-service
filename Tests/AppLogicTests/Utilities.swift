@@ -3,6 +3,7 @@ import XCTest
 import HTTP
 import URI
 import VaporSQLite
+import Fluent
 
 @testable import Vapor
 @testable import AppLogic
@@ -84,9 +85,9 @@ extension DropletDatabaseTests {
             let provider = try VaporSQLite.Provider(config: config)
             drop.addProvider(provider)
             
-            drop.preparations += [
-                Team.self
-            ]
+            let preparations: [Preparation.Type] = [Team.self,
+                                                    User.self]
+            drop.preparations += preparations
             
             try drop.runCommands()
         } catch {

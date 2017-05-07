@@ -1,44 +1,42 @@
 import Vapor
 import Fluent
-import Foundation
 
-final class Team: Model {
+final class User: Model {
     enum Key {
-        static let table = "teams"
+        static let table = "users"
         static let id = "id"
         static let name = "name"
-        static let description = "description"
+        static let email = "email"
     }
     
     var exists: Bool = false
     var id: Node?
     
     var name: String
-    var description: String?
+    var email: String
     
     init(node: Node, in context: Context) throws {
         name = try node.extract(Key.name)
-        description = try node.extract(Key.description)
+        email = try node.extract(Key.email)
     }
 }
 
 // MARK: -
 
-extension Team: NodeRepresentable {
+extension User: NodeRepresentable {
     func makeNode(context: Context) throws -> Node {
-        var node: [String: NodeConvertible] = [Key.name: name]
+        var node: [String: NodeConvertible] = [Key.name: name, Key.email: email]
         node[Key.id] = id?.int
-        node[Key.description] = description
         return try Node(node: node)
     }
 }
 
-extension Team: Preparation {
+extension User: Preparation {
     static func prepare(_ database: Database) throws {
-        try database.create(Key.table) { teams in
-            teams.id()
-            teams.string(Key.name)
-            teams.string(Key.description, optional: true)
+        try database.create(Key.table) { users in
+            users.id()
+            users.string(Key.name)
+            users.string(Key.email)
         }
     }
     

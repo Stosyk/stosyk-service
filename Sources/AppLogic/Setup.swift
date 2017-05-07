@@ -1,4 +1,5 @@
 @_exported import Vapor
+import Fluent
 import VaporPostgreSQL
 
 public func setup(_ drop: Droplet) throws {
@@ -17,9 +18,9 @@ private func setupProviders(_ drop: Droplet) throws {
 }
 
 private func setupModels(_ drop: Droplet) throws {
-    drop.preparations += [
-        Team.self
-    ]
+    let preparations: [Preparation.Type] = [Team.self,
+                                            User.self]
+    drop.preparations += preparations
 }
 
 private func setupRoutes(_ drop: Droplet) throws {

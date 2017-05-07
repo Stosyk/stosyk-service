@@ -12,5 +12,6 @@ class V1AdminCollection: RouteCollection {
         let v1 = builder.grouped("admin/v1")
         
         v1.resource(Team.Key.table, TeamController())
+        v1.resource(User.Key.table, UserController())
     }
 }
