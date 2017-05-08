@@ -29,12 +29,12 @@ class RouteTests: XCTestCase, DropletTests {
     }
     
     func testCORSMiddlewareConnection() throws {
-        try AppLogic.setup(drop)
-        try drop.runCommands()
+        try? AppLogic.setup(drop)
         
         var found = false
         for item in drop.middleware where item is CORSMiddleware { found = true }
         
         XCTAssertTrue(found)
+        
     }
 }
