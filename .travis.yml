@@ -4,10 +4,10 @@ os:
 language: generic
 sudo: required
 dist: trusty
-osx_image: xcode8.2
+osx_image: xcode8.3
 script:
-- SWIFTPM_TEST_TARGET=YES eval "$(curl -sL https://swift.vapor.sh/ci-3.1)"
-- SWIFTPM_TEST_TARGET=YES eval "$(curl -sL https://swift.vapor.sh/codecov)"
+- eval "$(cat script/ci-3.1)"
+- eval "$(cat script/codecov)"
 deploy:
   provider: heroku
   api_key:
